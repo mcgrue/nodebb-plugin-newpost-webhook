@@ -1,6 +1,6 @@
 {
-	"id": "nodebb-plugin-quickstart",
-	"url": "https://github.com/NodeBB/nodebb-plugin-quickstart",
+	"id": "nodebb-plugin-new-post-webhook",
+	"url": "https://github.com/mcgrue/nodebb-plugin-newpost-webhook",
 	"library": "./library.js",
 	"hooks": [
 		{
@@ -8,6 +8,9 @@
 		},
 		{
 			"hook": "filter:admin.header.build", "method": "addAdminNavigation"
+		},
+		{
+			"hook": "action:post.save", "method": "doNotificationWebhook"
 		}
 	],
 	"staticDirs": {

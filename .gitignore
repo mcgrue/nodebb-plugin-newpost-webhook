@@ -15,6 +15,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+package-lock.json
 
 # External tool builders
 .externalToolBuilders/

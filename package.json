@@ -1,25 +1,25 @@
 {
-  "name": "nodebb-plugin-quickstart",
+  "name": "nodebb-plugin-new-post-webhook",
   "version": "0.2.3",
-  "description": "A starter kit for quickly creating NodeBB plugins",
+  "description": "A simple way to fire a webhook when a new post happens",
   "main": "library.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/psychobunny/nodebb-plugin-quickstart"
+    "url": "https://github.com/mcgrue/nodebb-plugin-newpost-webhook"
   },
   "keywords": [
     "nodebb",
     "plugin",
-    "quickstart",
-    "shell"
+    "shell",
+    "webhook"
   ],
   "author": {
-    "name": "psychobunny",
-    "email": "psycho.bunny@hotmail.com"
+    "name": "mcgrue",
+    "email": "ben.mcgraw@gmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/psychobunny/nodebb-plugin-quickstart/issues"
+    "url": "https://github.com/mcgrue/nodebb-plugin-newpost-webhook/issues"
   },
   "readmeFilename": "README.md",
   "nbbpm": {
