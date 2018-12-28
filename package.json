@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-new-post-webhook",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "A simple way to fire a webhook when a new post happens",
   "main": "library.js",
   "repository": {
