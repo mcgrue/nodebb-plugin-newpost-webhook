@@ -37,9 +37,9 @@ plugin.addAdminNavigation = function(header, callback) {
 };
 
 var doWebhook = function(data, url) {
-	console.log("DO THE WEBHOOK");
-	console.log(data);
-	console.log(url);
+	console.info("DO THE WEBHOOK");
+	console.info(data);
+	console.info(url);
 
 	var options = {
 		url: url,
@@ -47,7 +47,8 @@ var doWebhook = function(data, url) {
 			'Content-Type': 'application/json',
 			'body': JSON.stringify(data)
 		},
-		method: 'POST'
+		method: 'POST',
+		formData: data
 	};
 
 	request(options, function(error, response, body) {
