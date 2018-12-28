@@ -5,8 +5,8 @@ var Meta = module.parent.require('./meta');
 var User = module.parent.require("./user");
 var Topics = module.parent.require("./topics");
 
-// var NodeBB = module.require('./nodebb')
-// var meta = NodeBB.meta;
+var nconf = module.parent.require('nconf');
+var request = module.parent.require('request');
 
 var plugin = {};
 
@@ -40,11 +40,31 @@ var doWebhook = function(data, url) {
 	console.log("DO THE WEBHOOK");
 	console.log(data);
 	console.log(url);
+
+	var options = {
+		url: url,
+		headers: {
+			'Content-Type': 'application/json',
+			'body': JSON.stringify(data)
+		},
+		method: 'POST'
+	};
+
+	request(options, function(error, response, body) {
+		if(error) {
+			console.error('error:', error);
+		}
+		console.log('new-post-webhook response code:', response.statusCode);
+	});
 };
 
 plugin.doNotificationWebhook = function(header, callback) {
 	Meta.settings.get('new-post-webhook', function(err, settings) {
 		var url = settings['webhook-new-post-url'];
+		var userVarName = settings['webhook-variable-name-user'];
+		var threadVarName = settings['webhook-variable-name-thread-title'];
+		var urlVarName = settings['webhook-variable-name-url'];
+
 		if(url) {
 			var tid = header.post.tid;
 			var uid = header.post.uid;
@@ -65,18 +85,18 @@ plugin.doNotificationWebhook = function(header, callback) {
 					// If there is an error or missing data, bail out and log it.
 					if (err || !name) return console.log("Couldn't find username.");
 			
-
 					// nconf.get('url')
 					// Links always follow this same structure.
 					// the site url + "topic/" + the topic slug + "/" + the post id
-					var link = "topic/" + topicSlug + "/" + pid;
+					var link = nconf.get('url') + "/topic/" + topicSlug + "/" + pid;
 
 					// Now do whatever we want with the data.
-					doWebhook({
-						name: name,
-						topic: topic,
-						link: link
-					}, url);
+					var data = {};
+					data[userVarName] = name;
+					data[threadVarName] = topic;
+					data[urlVarName] = link;
+
+					doWebhook(data, url);
 				});
 			});
 		}
